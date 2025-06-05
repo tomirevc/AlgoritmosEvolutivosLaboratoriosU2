@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Análisis de Notas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard de Análisis de Notas de los Estudiantes</h1>
+
+        <h2>Estadísticas Generales</h2>
+        <div>
+            <h3>Resumen Estadístico General:</h3>
+            <ul>
+                <li>Media: {{ estadisticas['mean'] }}</li>
+                <li>Desviación Estándar: {{ estadisticas['std'] }}</li>
+                <li>Min: {{ estadisticas['min'] }}</li>
+                <li>Max: {{ estadisticas['max'] }}</li>
+                <li>25%: {{ estadisticas['25%'] }}</li>
+                <li>50% (Mediana): {{ estadisticas['50%'] }}</li>
+                <li>75%: {{ estadisticas['75%'] }}</li>
+            </ul>
+        </div>
+
+        <h2>Gráficos Generales</h2>
+        <div>
+            <h3>Distribución de las Notas</h3>
+            <div>{{ fig_hist | safe }}</div>
+        </div>
+
+        <div>
+            <h3>Distribución de las Notas por Tipo de Examen</h3>
+            <div>{{ fig_box | safe }}</div>
+        </div>
+
+        <div>
+            <h3>Histograma por Tipo de Examen</h3>
+            <div>{{ fig_hist_tipo | safe }}</div>
+        </div>
+
+        <h2>Estadísticas por Tipo de Examen</h2>
+        <div>
+            <h3>Estadísticas Descriptivas por Tipo de Examen:</h3>
+            <div>{{ estadisticas_por_tipo | safe }}</div>
+        </div>
+
+        <h2>Gráfico de Comparación de Promedios por Tipo de Examen</h2>
+        <div>
+            <div>{{ fig_stats | safe }}</div>
+        </div>
+
+    </div>
+</body>
+</html>
