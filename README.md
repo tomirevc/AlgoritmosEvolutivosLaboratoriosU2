@@ -7,18 +7,18 @@ Este dashboard interactivo se crea con Flask y Plotly para visualizar y analizar
 # SEMANA 8
 
 ## ✅ Actividad 1: Análisis Comparativo
-Ejecuta los tres programas y compara los resultados
-Documenta tus observaciones en un archivo analisis.txt
+Ejecuta los tres programas y compara los resultados  
+Documenta tus observaciones en un archivo analisis.txt  
 
 ### 🔷 ¿Cuál representación logra mejor equilibrio entre los grupos?
 
 ### 🔷 ¿Cuál converge más rápido? (observa las generaciones)
 
 ## ✅ Actividad 2: Modificación de Fitness
-En representacion_binaria.py, modifica la función calcular_fitness para:
-Penalizar grupos con varianza alta de notas
-Premiar diversidad (mezclar alumnos de diferentes rendimientos)
-Compara los resultados con la versión original
+En representacion_binaria.py, modifica la función calcular_fitness para:  
+Penalizar grupos con varianza alta de notas  
+Premiar diversidad (mezclar alumnos de diferentes rendimientos)  
+Compara los resultados con la versión original  
 
 ### 🔷 Modificaciones:
 
@@ -46,32 +46,32 @@ Crea un nuevo archivo visualizacion.py que:
 
 ![Image](https://github.com/user-attachments/assets/25b0dc99-40e4-41de-b4b2-b1f47014df2d)
 
-🔰 **Binaria (Azul):** El fitness oscila mucho, indicando que el algoritmo explora el espacio de soluciones pero no converge rápidamente.
-🔰 **Permutacional (Verde):** El fitness es más estable, lo que sugiere una optimización más controlada.
-🔰 **Real (Rojo):** El fitness mejora constantemente, indicando que la representación real tiene una convergencia más eficiente hacia una solución óptima.
+🔰 **Binaria (Azul):** El fitness oscila mucho, indicando que el algoritmo explora el espacio de soluciones pero no converge rápidamente.  
+🔰 **Permutacional (Verde):** El fitness es más estable, lo que sugiere una optimización más controlada.  
+🔰 **Real (Rojo):** El fitness mejora constantemente, indicando que la representación real tiene una convergencia más eficiente hacia una solución óptima.  
 
 ### 🔷 Muestre un histograma de notas por examen
 
 ![Image](https://github.com/user-attachments/assets/4444cca4-95b1-46ed-91f4-8436d140caac)
 
-🔰 **Examen A (Azul):** La mayoría de los alumnos tienen notas altas.
-🔰 **Examen B (Naranja):** Distribución más uniforme, con concentración en notas intermedias.
-🔰 **Examen C (Verde):** Similar a los otros exámenes, con una ligera concentración en notas altas.
+🔰 **Examen A (Azul):** La mayoría de los alumnos tienen notas altas.  
+🔰 **Examen B (Naranja):** Distribución más uniforme, con concentración en notas intermedias.  
+🔰 **Examen C (Verde):** Similar a los otros exámenes, con una ligera concentración en notas altas.  
 
 ### 🔷 Compare las distribuciones de las 3 representaciones
 
 ![Image](https://github.com/user-attachments/assets/a727d1b6-6619-4abb-929c-380daf780703)
 
-🔰 **Distribución Binaria:** En la representación binaria, hay una gran concentración de alumnos en un solo examen (A) y pocas variaciones entre los otros exámenes, lo que sugiere que el algoritmo binario puede tener dificultades para distribuir equitativamente a los alumnos.
-🔰 **Distribución Permutacional:** En la representación permutacional, la distribución de las notas es más equilibrada, aunque aún se pueden notar algunas concentraciones en los exámenes A y C. Esta distribución es probablemente más eficiente que la binaria en cuanto a equidad.
-🔰 **Distribución Real:** Similar a la permutacional, pero con una mejor distribución de los alumnos entre los exámenes, lo que sugiere que la representación real podría estar optimizando mejor la asignación de alumnos.
+🔰 **Distribución Binaria:** En la representación binaria, hay una gran concentración de alumnos en un solo examen (A) y pocas variaciones entre los otros exámenes, lo que sugiere que el algoritmo binario puede tener dificultades para distribuir equitativamente a los alumnos.  
+🔰 **Distribución Permutacional:** En la representación permutacional, la distribución de las notas es más equilibrada, aunque aún se pueden notar algunas concentraciones en los exámenes A y C. Esta distribución es probablemente más eficiente que la binaria en cuanto a equidad.  
+🔰 **Distribución Real:** Similar a la permutacional, pero con una mejor distribución de los alumnos entre los exámenes, lo que sugiere que la representación real podría estar optimizando mejor la asignación de alumnos.  
 
 ## ✅ Actividad 6: Problema Extendido
 Modifica uno de los programas para distribuir los alumnos en 4 exámenes
 
 ### 🔷 ¿Qué cambios necesitas hacer en el cromosoma?
 
-Anteriormente, el cromosoma tenía 3 bits por alumno, uno para cada examen (A, B, C).
+Anteriormente, el cromosoma tenía 3 bits por alumno, uno para cada examen (A, B, C).  
 Ahora, cada alumno tiene 4 bits para representar su asignación a uno de los 4 
 exámenes (A, B, C, D). Esto hace que el cromosoma tenga un total de 156 bits (39 alumnos × 4 bits cada uno).
 
