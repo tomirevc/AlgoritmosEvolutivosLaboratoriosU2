@@ -459,3 +459,65 @@ exámenes (A, B, C, D). Esto hace que el cromosoma tenga un total de 156 bits (3
 Al agregar un examen adicional, el espacio de búsqueda aumenta. Hay más combinaciones posibles 
 de asignación para los alumnos, lo que hace que el algoritmo necesite más generaciones para 
 converger a una solución óptima.
+
+#### 🔰 Cromosoma con 4 exámenes:
+
+        # Modificación en la función para crear el cromosoma con 4 exámenes
+        def crear_cromosoma():
+            cromosoma = []
+            for i in range(39):  # 39 alumnos
+                examen = random.randint(0, 3)  # Ahora elegimos un examen entre A, B, C, D (4 exámenes)
+                genes = [0, 0, 0, 0]  # Inicializamos 4 bits (uno para cada examen)
+                genes[examen] = 1  # Asignamos el 1 al examen elegido
+                cromosoma.extend(genes)  # Añadimos los 4 bits al cromosoma
+            return cromosoma
+
+
+#### 🔰 Decodificación de Cromosoma con 4 Exámenes:
+
+        # Modificación en la función para decodificar el cromosoma con 4 exámenes
+        def decodificar_cromosoma(cromosoma):
+            asignaciones = {'A': [], 'B': [], 'C': [], 'D': []}  # Ahora tenemos 4 exámenes
+            examenes = ['A', 'B', 'C', 'D']  # Lista de 4 exámenes
+            
+            for i in range(39):  # Recorremos los 39 alumnos
+                idx = i * 4  # Cada alumno tiene ahora 4 valores en el cromosoma (uno por cada examen)
+                for j in range(4):  # Verificamos los 4 valores de cada alumno
+                    if cromosoma[idx + j] == 1:  # Encontramos el examen asignado (valor 1)
+                        asignaciones[examenes[j]].append(i)  # Asignamos el alumno al examen correspondiente
+                        break  # Detenemos la búsqueda ya que solo hay un 1 por alumno
+            
+            return asignaciones  # Devolvemos las asignaciones a los exámenes A, B, C y D
+
+
+#### 🔰 Cálculo del Fitness con 4 Exámenes:
+
+
+        # Modificación en la función calcular_fitness para trabajar con 4 exámenes
+        def calcular_fitness(cromosoma):
+            asignaciones = decodificar_cromosoma(cromosoma)  # Obtenemos las asignaciones de los 4 exámenes
+            
+            promedios = {}  # Diccionario para almacenar los promedios de cada examen
+            for examen in ['A', 'B', 'C', 'D']:  # Ahora tenemos 4 exámenes
+                indices = asignaciones[examen]  # Alumnos asignados a este examen
+                notas_examen = [notas[i] for i in indices]  # Notas de los alumnos asignados al examen
+                promedios[examen] = np.mean(notas_examen)  # Calculamos el promedio de notas por examen
+            
+            # Calculamos la desviación estándar entre los promedios de los 4 exámenes
+            desv_promedios = np.std(list(promedios.values()))
+            
+            bonus_diversidad = 0  # Variable para agregar un bono por diversidad en la distribución
+            for examen in ['A', 'B', 'C', 'D']:  # Comprobamos la diversidad en cada examen
+                indices = asignaciones[examen]
+                notas_examen = [notas[i] for i in indices]
+                
+                # Si la diferencia entre la nota más alta y la más baja es mayor que 5, agregamos un bono de diversidad
+                if max(notas_examen) - min(notas_examen) > 5:
+                    bonus_diversidad += 0.1  # Añadimos 0.1 al bono de diversidad
+            
+            # El fitness final se calcula restando la desviación de los promedios, sumando el bono de diversidad
+            fitness = -desv_promedios + bonus_diversidad
+            
+            return fitness  # Retornamos el fitness final
+
+
