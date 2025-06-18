@@ -40,90 +40,89 @@ def mutacion_gaussiana(cromosoma, sigma=0.1):
 ### 🔷 Prueba con diferentes valores de sigma:
 
 ## ✅ Actividad 4: Restricciones Adicionales
-Modifica representacion_permutacional.py para agregar una restricción:
-  Los alumnos con notas < 11 no pueden estar todos en el mismo examen
-  Ajusta la función de fitness para penalizar soluciones que violen esta restricción
+Modifica representacion_permutacional.py para agregar una restricción:  
+  Los alumnos con notas < 11 no pueden estar todos en el mismo examen  
+  Ajusta la función de fitness para penalizar soluciones que violen esta restricción  
 
 ### 🔷 **Función `verificar_restriccion`**
 
-Esta función verifica si la restricción de que "los alumnos con notas menores a 11 no pueden estar todos en el mismo examen" se cumple. Si se viola esta restricción, se devuelve una violación que se utilizará en el cálculo del fitness.
+Esta función verifica si la restricción de que "los alumnos con notas menores a 11 no pueden estar todos en el mismo examen" se cumple. Si se viola esta restricción, se devuelve una violación que se utilizará en el cálculo del fitness.  
 
-"Los alumnos con notas < 11 no pueden estar todos en el mismo examen"
-def verificar_restriccion(asignaciones):
-    violacion = 0  # Contador de violaciones de la restricción
-    
-    # Recorremos cada examen (A, B, C) para verificar la restricción
-    for examen in ['A', 'B', 'C']:
-        alumnos_examen = asignaciones[examen]  # Lista de alumnos asignados al examen
-        notas_examen = [notas[i] for i in alumnos_examen]  # Notas de los alumnos en ese examen
+    # Los alumnos con notas < 11 no pueden estar todos en el mismo examen
+    def verificar_restriccion(asignaciones):
+        violacion = 0  # Contador de violaciones de la restricción
         
-        # Verificamos si todos los alumnos en el examen tienen notas < 11
-        if len([nota for nota in notas_examen if nota < 11]) == len(notas_examen):
-            violacion += 1  # Si todos los alumnos tienen notas < 11, incrementamos la violación
-    
-    return violacion  # Retornamos el número de violaciones de la restricción
+        # Recorremos cada examen (A, B, C) para verificar la restricción
+        for examen in ['A', 'B', 'C']:
+            alumnos_examen = asignaciones[examen]  # Lista de alumnos asignados al examen
+            notas_examen = [notas[i] for i in alumnos_examen]  # Notas de los alumnos en ese examen
+            
+            # Verificamos si todos los alumnos en el examen tienen notas < 11
+            if len([nota for nota in notas_examen if nota < 11]) == len(notas_examen):
+                violacion += 1  # Si todos los alumnos tienen notas < 11, incrementamos la violación
+        
+        return violacion  # Retornamos el número de violaciones de la restricción
 
 
 ### 🔷 **Modificación en la Función `calcular_fitness`**
 
-"Modificar la función de fitness para penalizar si la restricción es violada"
-def calcular_fitness(cromosoma):
-    asignaciones = decodificar_cromosoma(cromosoma)  # Decodificamos el cromosoma para obtener las asignaciones
-    
-    # Verificamos si la restricción fue violada y aplicamos una penalización
-    penalizacion = verificar_restriccion(asignaciones) * 10  # Penalización de 10 por cada violación de la restricción
-    
-    promedios = {}  # Diccionario para almacenar los promedios de cada examen
-    for examen in ['A', 'B', 'C']:  # Recorremos los 3 exámenes
-        indices = asignaciones[examen]  # Alumnos asignados a este examen
-        notas_examen = [notas[i] for i in indices]  # Notas de los alumnos asignados al examen
-        promedios[examen] = np.mean(notas_examen)  # Calculamos el promedio de notas por examen
-    
-    # Calculamos la desviación estándar entre los promedios de los tres exámenes
-    desv_promedios = np.std(list(promedios.values()))
-    
-    bonus_diversidad = 0  # Variable para agregar un bono por diversidad en la distribución
-    for examen in ['A', 'B', 'C']:  # Comprobamos la diversidad en cada examen
-        indices = asignaciones[examen]
-        notas_examen = [notas[i] for i in indices]
+    # Modificar la función de fitness para penalizar si la restricción es violada
+    def calcular_fitness(cromosoma):
+        asignaciones = decodificar_cromosoma(cromosoma)  # Decodificamos el cromosoma para obtener las asignaciones
         
-        # Si la diferencia entre la nota más alta y la más baja es mayor que 5, agregamos un bono de diversidad
-        if max(notas_examen) - min(notas_examen) > 5:
-            bonus_diversidad += 0.1  # Añadimos 0.1 al bono de diversidad
-    
-    # El fitness final se calcula restando la desviación de los promedios, sumando el bono de diversidad y restando la penalización
-    fitness = -desv_promedios + bonus_diversidad - penalizacion
-    
-    return fitness  # Retornamos el fitness final, que ahora incluye penalización y bono por diversidad
+        # Verificamos si la restricción fue violada y aplicamos una penalización
+        penalizacion = verificar_restriccion(asignaciones) * 10  # Penalización de 10 por cada violación de la restricción
+        
+        promedios = {}  # Diccionario para almacenar los promedios de cada examen
+        for examen in ['A', 'B', 'C']:  # Recorremos los 3 exámenes
+            indices = asignaciones[examen]  # Alumnos asignados a este examen
+            notas_examen = [notas[i] for i in indices]  # Notas de los alumnos asignados al examen
+            promedios[examen] = np.mean(notas_examen)  # Calculamos el promedio de notas por examen
+        
+        # Calculamos la desviación estándar entre los promedios de los tres exámenes
+        desv_promedios = np.std(list(promedios.values()))
+        
+        bonus_diversidad = 0  # Variable para agregar un bono por diversidad en la distribución
+        for examen in ['A', 'B', 'C']:  # Comprobamos la diversidad en cada examen
+            indices = asignaciones[examen]
+            notas_examen = [notas[i] for i in indices]
+            
+            # Si la diferencia entre la nota más alta y la más baja es mayor que 5, agregamos un bono de diversidad
+            if max(notas_examen) - min(notas_examen) > 5:
+                bonus_diversidad += 0.1  # Añadimos 0.1 al bono de diversidad
+        
+        # El fitness final se calcula restando la desviación de los promedios, sumando el bono de diversidad y restando la penalización
+        fitness = -desv_promedios + bonus_diversidad - penalizacion
+        
+        return fitness  # Retornamos el fitness final, que ahora incluye penalización y bono por diversidad
 
 
 ### 🔷 **Explicación de la Función mutacion**
 
-" Función de mutación: intercambiamos los exámenes de dos alumnos aleatorios "
-def mutacion(cromosoma):
-    cromosoma_mutado = cromosoma.copy()  # Creamos una copia del cromosoma para no modificar el original
-    
-    # Seleccionamos dos alumnos aleatorios para intercambiar sus asignaciones
-    alumno1 = random.randint(0, 38)  # Alumno 1 (aleatorio)
-    alumno2 = random.randint(0, 38)  # Alumno 2 (aleatorio)
-    
-    idx1 = alumno1 * 3  # Índice de inicio para el alumno 1 (cada alumno tiene 3 valores)
-    idx2 = alumno2 * 3  # Índice de inicio para el alumno 2
-    
-    # Identificamos el examen asignado a cada alumno
-    examen1 = [i for i in range(3) if cromosoma_mutado[idx1 + i] == 1][0]
-    examen2 = [i for i in range(3) if cromosoma_mutado[idx2 + i] == 1][0]
-    
-    # Si los alumnos están asignados a exámenes diferentes, los intercambiamos
-    if examen1 != examen2:
-        cromosoma_mutado[idx1:idx1+3] = [0, 0, 0]  # Limpiamos la asignación original del alumno 1
-        cromosoma_mutado[idx1 + examen2] = 1  # Asignamos el examen del alumno 2 al alumno 1
+    # Función de mutación: intercambiamos los exámenes de dos alumnos aleatorios
+    def mutacion(cromosoma):
+        cromosoma_mutado = cromosoma.copy()  # Creamos una copia del cromosoma para no modificar el original
         
-        cromosoma_mutado[idx2:idx2+3] = [0, 0, 0]  # Limpiamos la asignación original del alumno 2
-        cromosoma_mutado[idx2 + examen1] = 1  # Asignamos el examen del alumno 1 al alumno 2
-    
-    return cromosoma_mutado  # Retornamos el cromosoma mutado
-
+        # Seleccionamos dos alumnos aleatorios para intercambiar sus asignaciones
+        alumno1 = random.randint(0, 38)  # Alumno 1 (aleatorio)
+        alumno2 = random.randint(0, 38)  # Alumno 2 (aleatorio)
+        
+        idx1 = alumno1 * 3  # Índice de inicio para el alumno 1 (cada alumno tiene 3 valores)
+        idx2 = alumno2 * 3  # Índice de inicio para el alumno 2
+        
+        # Identificamos el examen asignado a cada alumno
+        examen1 = [i for i in range(3) if cromosoma_mutado[idx1 + i] == 1][0]
+        examen2 = [i for i in range(3) if cromosoma_mutado[idx2 + i] == 1][0]
+        
+        # Si los alumnos están asignados a exámenes diferentes, los intercambiamos
+        if examen1 != examen2:
+            cromosoma_mutado[idx1:idx1+3] = [0, 0, 0]  # Limpiamos la asignación original del alumno 1
+            cromosoma_mutado[idx1 + examen2] = 1  # Asignamos el examen del alumno 2 al alumno 1
+            
+            cromosoma_mutado[idx2:idx2+3] = [0, 0, 0]  # Limpiamos la asignación original del alumno 2
+            cromosoma_mutado[idx2 + examen1] = 1  # Asignamos el examen del alumno 1 al alumno 2
+        
+        return cromosoma_mutado  # Retornamos el cromosoma mutado
 
 
 ## ✅ Actividad 5: Visualización (Avanzado)
