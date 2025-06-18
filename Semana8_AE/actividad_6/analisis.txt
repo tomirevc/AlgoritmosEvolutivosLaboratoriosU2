@@ -1,0 +1,36 @@
+1. ¿Qué cambios necesitas hacer en el cromosoma?
+Cromosoma:
+
+Anteriormente, el cromosoma tenía 3 bits por alumno, uno para cada examen (A, B, C).
+
+Ahora, cada alumno tiene 4 bits para representar su asignación a uno de los 4 
+exámenes (A, B, C, D). Esto hace que el cromosoma tenga un total de 156 bits (39 alumnos × 4 bits cada uno).
+
+Mutación:
+
+La mutación también debe operar sobre 4 bits en lugar de 3, intercambiando los exámenes 
+de los alumnos entre los 4 exámenes posibles.
+
+Decodificación:
+
+En la función decodificar_cromosoma, ahora necesitamos asignar un alumno a uno de los 4
+ exámenes, en lugar de 3.
+
+2. ¿Cómo afecta esto a la convergencia del algoritmo?
+Mayor complejidad:
+
+Al agregar un examen adicional, el espacio de búsqueda aumenta. Hay más combinaciones posibles 
+de asignación para los alumnos, lo que hace que el algoritmo necesite más generaciones para 
+converger a una solución óptima.
+
+Convergencia más lenta:
+
+La convergencia del algoritmo podría volverse más lenta, ya que el algoritmo tiene que explorar 
+un espacio de soluciones más grande. Esto puede requerir más generaciones para encontrar una 
+distribución equilibrada de los alumnos entre los exámenes.
+
+Mayor diversidad:
+
+La inclusión de un examen adicional aumenta la diversidad en las soluciones, ya que ahora hay 
+más variabilidad en la asignación de los alumnos, lo que puede ser positivo en términos de evitar 
+una convergencia prematura hacia una solución subóptima.

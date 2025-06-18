@@ -1,0 +1,98 @@
+# Explicación de los cambios en el código:
+
+Restricción de notas < 11:
+
+Se añadió una penalización en el fitness si todos los alumnos con notas menores a 
+11 están en el mismo examen. Esto asegura que los exámenes no tengan una concentración 
+total de alumnos con bajas calificaciones.
+
+Función de fitness:
+
+Se ajustó el fitness para penalizar la violación de la restricción y, al mismo tiempo, 
+premiar la diversidad en la distribución de notas entre los exámenes, balanceando la asignación de alumnos con diferentes calificaciones.
+
+# Interpretación de los resultados:
+
+Mejora del fitness:
+El fitness mejora significativamente, pasando de 0.1187 en la generación 0 a 0.2637 en la g
+eneración 40 (una mejora de 122.2%), lo que indica que el algoritmo está optimizando correctamente 
+la distribución de los alumnos para cumplir con los criterios del problema.
+
+Promedios similares:
+Los promedios de los exámenes A (15.38), B (15.38) y C (15.46) están muy equilibrados, lo cual 
+es deseable. Esto muestra que el algoritmo está distribuyendo de manera eficiente los alumnos para q
+ue los exámenes tengan promedios similares.
+
+Rangos de notas:
+Los rangos de notas son razonablemente bajos, con un rango de 9 en el examen A y 11 en los exámenes 
+B y C. Esto sugiere que el algoritmo no solo está equilibrando los promedios, sino también reduciendo 
+la variabilidad de las notas dentro de cada examen.
+
+Secuencias de asignación:
+Las secuelas de alumnos están distribuidas de manera lógica, con alumnos con notas más 
+altas tendiendo a estar en las primeras posiciones y los de notas más bajas distribuidos 
+hacia el final. Esto refleja que el algoritmo trata de asignar a los alumnos de acuerdo a sus 
+calificaciones, lo que es un buen comportamiento considerando la restricción de notas bajas.
+
+# Impacto de los cambios:
+
+La penalización por violar la restricción ayuda a evitar que todos los alumnos con notas bajas es
+tén concentrados en un solo examen. Aunque no hay una violación visible en los resultados (todos 
+los exámenes tienen alumnos con notas altas y bajas), la penalización asegura que el algoritmo busque 
+soluciones que distribuyan mejor las calificaciones.
+
+La mejora del fitness y la distribución equilibrada de los alumnos en los tres exámenes indican que los 
+cambios en el código ayudaron a conseguir una mejor solución que optimiza tanto la diversidad como el 
+equilibrio de promedios.
+
+#RESULTADOS
+
+REPRESENTACIÓN PERMUTACIONAL
+Problema: Secuenciar alumnos para asignación ordenada a exámenes
+Cromosoma: Permutación de 39 índices de alumnos
+Decodificación: Posiciones [0-12] → Examen A, [13-25] → Examen B, [26-38] → Examen C
+
+Generación 0: Mejor fitness = 0.1187
+Generación 10: Mejor fitness = 0.2275
+Generación 20: Mejor fitness = 0.2637
+Generación 30: Mejor fitness = 0.2637
+Generación 40: Mejor fitness = 0.2637   
+
+Asignación final por orden de secuencia:
+
+Examen A: 13 alumnos, promedio = 15.38  
+  Secuencia de alumnos:
+    Posición 1: Alumno37 (Nota: 13.0)
+    Posición 2: Alumno8 (Nota: 13.0) 
+    Posición 3: Alumno18 (Nota: 16.0)
+    Posición 4: Alumno26 (Nota: 19.0)
+    Posición 5: Alumno25 (Nota: 18.0)
+    ... (mostrando primeros 5)
+
+Examen B: 13 alumnos, promedio = 15.38
+  Secuencia de alumnos:
+    Posición 1: Alumno23 (Nota: 16.0)
+    Posición 2: Alumno5 (Nota: 15.0)
+    Posición 3: Alumno3 (Nota: 14.0)
+    Posición 4: Alumno35 (Nota: 11.0)
+    Posición 5: Alumno10 (Nota: 17.0)
+    ... (mostrando primeros 5)
+
+Examen C: 13 alumnos, promedio = 15.46
+  Secuencia de alumnos:
+    Posición 1: Alumno27 (Nota: 18.0)
+    Posición 2: Alumno12 (Nota: 19.0)
+    Posición 3: Alumno7 (Nota: 14.0)
+    Posición 4: Alumno30 (Nota: 20.0)
+    Posición 5: Alumno9 (Nota: 13.0)
+    ... (mostrando primeros 5)
+
+Estadísticas finales:
+Promedios: A=15.38, B=15.38, C=15.46
+Rangos de notas: A=9, B=11, C=11
+Desviación estándar entre promedios: 0.0363
+
+Evolución del algoritmo:
+Fitness inicial: 0.1187
+Fitness final: 0.2637
+Mejora total: 122.2%

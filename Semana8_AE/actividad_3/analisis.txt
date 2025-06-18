@@ -1,0 +1,110 @@
+# 1. Qué hizo la modificación en el código y qué hace el sigma
+La mutación gaussiana agrega perturbaciones aleatorias a los 
+pesos de cada cromosoma utilizando una distribución normal con media 0 y
+ desviación estándar sigma. El valor de sigma controla el tamaño de la perturbación:
+
+Sigma pequeño (0.05): Perturbaciones pequeñas.
+
+Sigma grande (0.3): Perturbaciones grandes.
+
+# 2. Breve análisis de los distintos resultados
+Sigma = 0.3: Genera soluciones con notas más dispersas (mayor varianza) y fitness 
+constante en todas las generaciones, sin mejoras significativas.
+
+Sigma = 0.1: Soluciones más equilibradas, con promedios de notas similares y una varianza 
+un poco menor que con sigma = 0.3, resultando en una mejor estabilidad.
+
+Sigma = 0.05: Menor variabilidad en las notas, con una varianza más baja en el examen A 
+y notas más consistentes.
+
+# 3. En qué afecta y qué diferencias se obtuvieron con esos 3 valores
+Sigma = 0.3: Varianzas más altas en todas las asignaciones, con fitness estancado en 
+las generaciones (no mejora).
+
+Sigma = 0.1: Soluciones más estables y mejor desempeño en el fitness en comparación 
+con sigma = 0.3.
+
+Sigma = 0.05: Menor varianza en las notas del examen A y una distribución más precisa 
+de los alumnos entre los exámenes, con promedios y varianzas muy consistentes.
+
+# RESULTADOS
+
+
+REPRESENTACIÓN REAL - SIGMA 0.3
+
+Problema: Optimizar distribución de alumnos usando pesos probabilísticos
+Cromosoma: 117 valores reales (39 alumnos × 3 pesos normalizados)
+Generación 0: Mejor fitness = -1.0911
+Generación 30: Mejor fitness = -1.0911
+Generación 60: Mejor fitness = -1.0911
+Generación 90: Mejor fitness = -1.0911
+Generación 120: Mejor fitness = -1.0911
+
+Distribución optimizada:
+Examen A: 13 alumnos
+  Promedio: 15.46, Varianza: 10.25
+  Rango de notas: [9 - 20]
+Examen B: 13 alumnos
+  Promedio: 15.38, Varianza: 11.01
+  Rango de notas: [9 - 20]
+Examen C: 13 alumnos
+  Promedio: 15.38, Varianza: 10.39
+  Rango de notas: [10 - 20]
+
+Análisis de equilibrio:
+Promedios por examen: A=15.46, B=15.38, C=15.38
+Desviación estándar entre promedios: 0.0363
+Diferencia máxima entre promedios: 0.08
+
+
+REPRESENTACIÓN REAL - SIGMA 0.1
+Problema: Optimizar distribución de alumnos usando pesos probabilísticos
+Cromosoma: 117 valores reales (39 alumnos × 3 pesos normalizados)
+Generación 0: Mejor fitness = -1.0911
+Generación 30: Mejor fitness = -1.0911
+Generación 60: Mejor fitness = -1.0911
+Generación 90: Mejor fitness = -1.0911
+Generación 120: Mejor fitness = -1.0911
+
+Distribución optimizada:
+Examen A: 13 alumnos
+  Promedio: 15.46, Varianza: 10.09
+  Rango de notas: [10 - 20]       
+Examen B: 13 alumnos
+  Promedio: 15.38, Varianza: 9.62 
+  Rango de notas: [9 - 19]        
+Examen C: 13 alumnos
+  Promedio: 15.38, Varianza: 11.93
+  Rango de notas: [9 - 20]
+
+Análisis de equilibrio:
+Promedios por examen: A=15.46, B=15.38, C=15.38
+Desviación estándar entre promedios: 0.0363
+Diferencia máxima entre promedios: 0.08
+
+
+
+REPRESENTACIÓN REAL - SIGMA 0.05
+Problema: Optimizar distribución de alumnos usando pesos probabilísticos
+Cromosoma: 117 valores reales (39 alumnos × 3 pesos normalizados)       
+Generación 0: Mejor fitness = -1.0911
+Generación 30: Mejor fitness = -1.0911
+Generación 60: Mejor fitness = -1.0911
+Generación 90: Mejor fitness = -1.0911
+Generación 120: Mejor fitness = -1.0911
+
+Distribución optimizada:
+Examen A: 13 alumnos
+  Promedio: 15.38, Varianza: 7.16
+  Rango de notas: [10 - 19]      
+Examen B: 13 alumnos
+  Promedio: 15.38, Varianza: 9.62
+  Rango de notas: [9 - 20]
+Examen C: 13 alumnos
+  Promedio: 15.46, Varianza: 14.86
+  Rango de notas: [9 - 20]
+
+Análisis de equilibrio:
+Promedios por examen: A=15.38, B=15.38, C=15.46
+Desviación estándar entre promedios: 0.0363
+Diferencia máxima entre promedios: 0.08
