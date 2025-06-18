@@ -117,22 +117,26 @@ Documenta tus observaciones en un archivo analisis.txt
 
 ### 🔷 ¿Cuál representación logra mejor equilibrio entre los grupos?
 
-**Análisis:**  
+🔰**Análisis:**  
+
 *Representación Binaria:* La desviación estándar entre los promedios de los tres exámenes es 0.0363, lo que indica una distribución bastante equilibrada de los alumnos entre los exámenes A, B y C.  
 *Representación Permutacional:* La desviación estándar también es 0.0363, lo que sugiere que, aunque la secuenciación de los alumnos cambia, los promedios de las calificaciones entre los exámenes A, B y C siguen estando equilibrados de manera similar.  
 *Representación Real:* La desviación estándar sigue siendo 0.0363 entre los promedios de los tres exámenes, lo que también muestra un buen equilibrio. La diferencia máxima entre los promedios es solo 0.08, lo que indica que los exámenes están muy bien equilibrados en cuanto a calificaciones.  
 
 🔰 **Conclusión:**  
+
 Las tres representaciones logran un equilibrio similar entre los grupos. No hay una representación que destaque significativamente sobre las otras en cuanto al equilibrio, ya que las desviaciones estándar entre los promedios son muy pequeñas en todos los casos. Sin embargo, todas las representaciones aseguran una distribución bastante equilibrada entre los tres exámenes.  
         
 ### 🔷 ¿Cuál converge más rápido? (observa las generaciones)
 
-**Análisis:**  
+🔰 **Análisis:**  
+
 *Representación Binaria:* En la Generación 0, el fitness es -0.0725, y mejora rápidamente a -0.0363 en la Generación 20, donde se estabiliza. El algoritmo converge rápidamente en las primeras 20 generaciones.  
 *Representación Permutacional:* El fitness se mantiene constante desde la Generación 0 (con un valor de 0.2637) hasta la Generación 40, sin ninguna mejora. Esto indica que el algoritmo no converge ni mejora con el tiempo.  
 *Representación Real:* El fitness mejora desde -1.1270 en la Generación 0 hasta -1.0911 en la Generación 30, y luego se estabiliza. La mejora ocurre principalmente en las primeras 30 generaciones.  
 
 🔰 **Conclusión:**  
+
 La representación binaria converge más rápido, con mejoras significativas en las primeras 20 generaciones, mientras que la representación real mejora de manera gradual y se estabiliza después de la Generación 30. La representación permutacional no muestra mejora en absoluto y no converge.  
 
 
@@ -207,7 +211,8 @@ La distribución de los exámenes muestra una gran variabilidad, con promedios d
 
 **Versión Original:** En comparación, la versión original logró una distribución equilibrada de los alumnos, con promedios cercanos en todos los exámenes (15.38 a 15.46), y una desviación estándar baja de 0.0363, lo que indica que los alumnos fueron distribuidos de manera más uniforme en los exámenes A, B y C.  
 
-🔰 **Conclusión:**   
+🔰 **Conclusión:**  
+
 La versión original mantiene una distribución más equilibrada entre los grupos, con promedios cercanos y una desviación estándar baja, lo que indica una distribución equitativa de los alumnos entre los exámenes.  
 La versión modificada muestra mejoras en el fitness debido a la penalización por varianza y la recompensa por diversidad, pero sacrifica el equilibrio entre los exámenes, resultando en una mayor desviación estándar y una asignación más desigual de los alumnos.
 
