@@ -518,6 +518,6 @@ converger a una solución óptima.
             # El fitness final se calcula restando la desviación de los promedios, sumando el bono de diversidad
             fitness = -desv_promedios + bonus_diversidad
             
-            return fitness  # Retornamos el fitness final
+            return fitness  # Retornamos el fitness final 
 
 
