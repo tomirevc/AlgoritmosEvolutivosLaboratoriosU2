@@ -153,11 +153,114 @@ Compara los resultados con la versión original
 
 
 ## ✅ Actividad 3: Nuevo Operador Genético
+
 En representacion_real.py, implementa un operador de mutación diferente:
 
-def mutacion_gaussiana(cromosoma, sigma=0.1):
-    # Tu implementación aquí
-    # Debe mantener la normalización (suma = 1)
+        def mutacion_gaussiana(cromosoma, sigma=0.05):  # sigma controla la magnitud de la perturbación
+            cromosoma_mutado = cromosoma.copy()  # Hacemos una copia del cromosoma para no modificar el original
+            
+            # Recorremos cada alumno (39 alumnos)
+            for i in range(39):
+                idx = i * 3  # Cada alumno tiene 3 valores correspondientes a sus asignaciones a los 3 exámenes
+                genes = cromosoma_mutado[idx:idx+3]  # Extraemos los 3 valores correspondientes a ese alumno
+                
+                # Perturbamos cada peso con ruido gaussiano (normal) con media 0 y desviación estándar sigma
+                genes_perturbados = [max(0.0, g + random.gauss(0, sigma)) for g in genes]
+                # max(0.0, ...) asegura que los valores no sean negativos, ya que no puede haber asignaciones negativas
+                
+                suma = sum(genes_perturbados)  # Calculamos la suma de los valores perturbados
+                if suma > 0:
+                    # Normalizamos los valores para que sumen 1, ya que las asignaciones deben ser probabilidades
+                    genes_normalizados = [g/suma for g in genes_perturbados]
+                else:
+                    # Si la suma es 0 (caso raro), asignamos valores iguales a cada examen
+                    genes_normalizados = [1/3, 1/3, 1/3]
+                
+                # Reemplazamos los 3 valores originales con los valores normalizados
+                cromosoma_mutado[idx:idx+3] = genes_normalizados
+            
+            return cromosoma_mutado  # Retornamos el cromosoma con las mutaciones gaussianas aplicadas
+
+
+### 🔷 REPRESENTACIÓN REAL - SIGMA 0.3
+    
+        Problema: Optimizar distribución de alumnos usando pesos probabilísticos
+        Cromosoma: 117 valores reales (39 alumnos × 3 pesos normalizados)
+        Generación 0: Mejor fitness = -1.0911
+        Generación 30: Mejor fitness = -1.0911
+        Generación 60: Mejor fitness = -1.0911
+        Generación 90: Mejor fitness = -1.0911
+        Generación 120: Mejor fitness = -1.0911
+        
+        Distribución optimizada:
+        Examen A: 13 alumnos
+          Promedio: 15.46, Varianza: 10.25
+          Rango de notas: [9 - 20]
+        Examen B: 13 alumnos
+          Promedio: 15.38, Varianza: 11.01
+          Rango de notas: [9 - 20]
+        Examen C: 13 alumnos
+          Promedio: 15.38, Varianza: 10.39
+          Rango de notas: [10 - 20]
+        
+        Análisis de equilibrio:
+        Promedios por examen: A=15.46, B=15.38, C=15.38
+        Desviación estándar entre promedios: 0.0363
+        Diferencia máxima entre promedios: 0.08
+        
+        
+### 🔷 REPRESENTACIÓN REAL - SIGMA 0.1
+
+        Problema: Optimizar distribución de alumnos usando pesos probabilísticos
+        Cromosoma: 117 valores reales (39 alumnos × 3 pesos normalizados)
+        Generación 0: Mejor fitness = -1.0911
+        Generación 30: Mejor fitness = -1.0911
+        Generación 60: Mejor fitness = -1.0911
+        Generación 90: Mejor fitness = -1.0911
+        Generación 120: Mejor fitness = -1.0911
+        
+        Distribución optimizada:
+        Examen A: 13 alumnos
+          Promedio: 15.46, Varianza: 10.09
+          Rango de notas: [10 - 20]       
+        Examen B: 13 alumnos
+          Promedio: 15.38, Varianza: 9.62 
+          Rango de notas: [9 - 19]        
+        Examen C: 13 alumnos
+          Promedio: 15.38, Varianza: 11.93
+          Rango de notas: [9 - 20]
+        
+        Análisis de equilibrio:
+        Promedios por examen: A=15.46, B=15.38, C=15.38
+        Desviación estándar entre promedios: 0.0363
+        Diferencia máxima entre promedios: 0.08
+        
+        
+### 🔷 REPRESENTACIÓN REAL - SIGMA 0.05
+
+        Problema: Optimizar distribución de alumnos usando pesos probabilísticos
+        Cromosoma: 117 valores reales (39 alumnos × 3 pesos normalizados)       
+        Generación 0: Mejor fitness = -1.0911
+        Generación 30: Mejor fitness = -1.0911
+        Generación 60: Mejor fitness = -1.0911
+        Generación 90: Mejor fitness = -1.0911
+        Generación 120: Mejor fitness = -1.0911
+        
+        Distribución optimizada:
+        Examen A: 13 alumnos
+          Promedio: 15.38, Varianza: 7.16
+          Rango de notas: [10 - 19]      
+        Examen B: 13 alumnos
+          Promedio: 15.38, Varianza: 9.62
+          Rango de notas: [9 - 20]
+        Examen C: 13 alumnos
+          Promedio: 15.46, Varianza: 14.86
+          Rango de notas: [9 - 20]
+        
+        Análisis de equilibrio:
+        Promedios por examen: A=15.38, B=15.38, C=15.46
+        Desviación estándar entre promedios: 0.0363
+        Diferencia máxima entre promedios: 0.08
     
 ### 🔷 Prueba con diferentes valores de sigma:
 
