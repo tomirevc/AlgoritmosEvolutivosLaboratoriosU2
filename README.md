@@ -20,7 +20,15 @@ Penalizar grupos con varianza alta de notas
 Premiar diversidad (mezclar alumnos de diferentes rendimientos)  
 Compara los resultados con la versión original  
 
-### 🔷 Modificaciones:
+### 🔷 Función verificar_restriccion
+
+
+### 🔷 Modificación en la Función calcular_fitness
+
+
+### 🔷 Explicación de la Función mutacion
+
+
 
 ## ✅ Actividad 3: Nuevo Operador Genético
 En representacion_real.py, implementa un operador de mutación diferente:
@@ -36,7 +44,25 @@ Modifica representacion_permutacional.py para agregar una restricción:
   Los alumnos con notas < 11 no pueden estar todos en el mismo examen
   Ajusta la función de fitness para penalizar soluciones que violen esta restricción
 
-### 🔷 Modificaciones:
+### 🔷 **Función `verificar_restriccion`**
+
+Esta función verifica si la restricción de que "los alumnos con notas menores a 11 no pueden estar todos en el mismo examen" se cumple. Si se viola esta restricción, se devuelve una violación que se utilizará en el cálculo del fitness.
+
+```# Función para verificar la restricción: ```
+```# "Los alumnos con notas < 11 no pueden estar todos en el mismo examen"```
+def verificar_restriccion(asignaciones):
+    violacion = 0  # Contador de violaciones de la restricción
+    
+    # Recorremos cada examen (A, B, C) para verificar la restricción
+    for examen in ['A', 'B', 'C']:
+        alumnos_examen = asignaciones[examen]  # Lista de alumnos asignados al examen
+        notas_examen = [notas[i] for i in alumnos_examen]  # Notas de los alumnos en ese examen
+        
+        # Verificamos si todos los alumnos en el examen tienen notas < 11
+        if len([nota for nota in notas_examen if nota < 11]) == len(notas_examen):
+            violacion += 1  # Si todos los alumnos tienen notas < 11, incrementamos la violación
+    
+    return violacion  # Retornamos el número de violaciones de la restricción
 
 
 ## ✅ Actividad 5: Visualización (Avanzado)
