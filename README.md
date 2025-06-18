@@ -142,10 +142,74 @@ Penalizar grupos con varianza alta de notas
 Premiar diversidad (mezclar alumnos de diferentes rendimientos)  
 Compara los resultados con la versión original  
 
-### 🔷 Versión original
+        def calcular_fitness(cromosoma):
+            asignaciones = decodificar_cromosoma(cromosoma)
+            
+            # Penaliza si algún examen tiene menos de 13 alumnos
+            if any(len(asignaciones[ex]) != 13 for ex in ['A', 'B', 'C']):
+                return -1000
+            
+            promedios = {}
+            varianzas = {}
+            diversidad_bonus = 0
+            
+            for examen in ['A', 'B', 'C']:
+                indices = asignaciones[examen]
+                notas_examen = [notas[i] for i in indices]
+                
+                # Calcular el promedio y la varianza de las notas
+                promedios[examen] = np.mean(notas_examen)
+                varianzas[examen] = np.var(notas_examen)
+                
+                # Premiar la diversidad (si la varianza es alta, se da un bono)
+                if varianzas[examen] > 5:  # Umbral arbitrario para la diversidad
+                    diversidad_bonus += 0.1
+        
+            # Penaliza la varianza alta en los grupos (mientras mayor la varianza, peor el fitness)
+            penalizacion_varianza = sum([varianzas[ex] for ex in ['A', 'B', 'C']])
+            
+            # La función de fitness ahora es: minimizar la varianza (penalización) y maximizar la diversidad (bonus)
+            fitness = -penalizacion_varianza + diversidad_bonus
+            
+            return fitness
 
-### 🔷 Modificación de fitness
+### 🔷 Resultados
 
+            ### REPRESENTACIÓN BINARIA MODIFICADA
+                
+                Problema: Distribuir 39 alumnos en 3 exámenes (A, B, C) de forma equitativa
+                Cromosoma: 117 bits (39 alumnos × 3 bits cada uno)
+                Gen: [0,1,0] significa alumno asignado a examen B
+        
+                Generación 0: Mejor fitness = -30.7296
+                Generación 20: Mejor fitness = -21.7118
+                Generación 40: Mejor fitness = -10.5799
+                Generación 60: Mejor fitness = -7.4911
+                Generación 80: Mejor fitness = -5.5030
+        
+                Distribución final:
+                Examen A: 13 alumnos, promedio = 11.77
+                Alumnos: ['Alumno2', 'Alumno4', 'Alumno6', 'Alumno7', 'Alumno8']... (mostrando primeros 5)     
+                Examen B: 13 alumnos, promedio = 15.38
+                Alumnos: ['Alumno1', 'Alumno3', 'Alumno5', 'Alumno10', 'Alumno13']... (mostrando primeros 5)   
+                Examen C: 13 alumnos, promedio = 19.08
+                Alumnos: ['Alumno11', 'Alumno12', 'Alumno15', 'Alumno17', 'Alumno19']... (mostrando primeros 5)
+        
+                Verificación de equilibrio:
+                Desviación estándar entre promedios: 2.9834
+
+### 🔷Compara los resultados con la versión original
+
+🔰 **Análisis:** 
+
+**Representación Binaria Modificada:** En la versión modificada, el fitness comienza en -30.7296 y mejora progresivamente hasta -5.5030 en la Generación 80, lo que indica una convergencia más lenta en comparación con la versión original.   
+La distribución de los exámenes muestra una gran variabilidad, con promedios de 11.77 en el Examen A, 15.38 en el Examen B y 19.08 en el Examen C. Esto se refleja en una desviación estándar de 2.9834, significativamente más alta que la versión original. Esto sugiere que, al intentar premiar la diversidad en las calificaciones, el algoritmo ha generado un desequilibrio en la asignación de los alumnos.  
+
+**Versión Original:** En comparación, la versión original logró una distribución equilibrada de los alumnos, con promedios cercanos en todos los exámenes (15.38 a 15.46), y una desviación estándar baja de 0.0363, lo que indica que los alumnos fueron distribuidos de manera más uniforme en los exámenes A, B y C.  
+
+🔰 **Conclusión:**   
+La versión original mantiene una distribución más equilibrada entre los grupos, con promedios cercanos y una desviación estándar baja, lo que indica una distribución equitativa de los alumnos entre los exámenes.  
+La versión modificada muestra mejoras en el fitness debido a la penalización por varianza y la recompensa por diversidad, pero sacrifica el equilibrio entre los exámenes, resultando en una mayor desviación estándar y una asignación más desigual de los alumnos.
 
 
 ## ✅ Actividad 3: Nuevo Operador Genético
