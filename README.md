@@ -142,13 +142,9 @@ Penalizar grupos con varianza alta de notas
 Premiar diversidad (mezclar alumnos de diferentes rendimientos)  
 Compara los resultados con la versión original  
 
-### 🔷 Función verificar_restriccion
+### 🔷 Versión original
 
-
-### 🔷 Modificación en la Función calcular_fitness
-
-
-### 🔷 Explicación de la Función mutacion
+### 🔷 Modificación de fitness
 
 
 
@@ -182,7 +178,7 @@ En representacion_real.py, implementa un operador de mutación diferente:
             return cromosoma_mutado  # Retornamos el cromosoma con las mutaciones gaussianas aplicadas
 
 
-### 🔷 REPRESENTACIÓN REAL - SIGMA 0.3
+### 🔷 Representación real - Sigma 0.3
     
         Problema: Optimizar distribución de alumnos usando pesos probabilísticos
         Cromosoma: 117 valores reales (39 alumnos × 3 pesos normalizados)
@@ -209,7 +205,7 @@ En representacion_real.py, implementa un operador de mutación diferente:
         Diferencia máxima entre promedios: 0.08
         
         
-### 🔷 REPRESENTACIÓN REAL - SIGMA 0.1
+### 🔷 Representación real - Sigma 0.1
 
         Problema: Optimizar distribución de alumnos usando pesos probabilísticos
         Cromosoma: 117 valores reales (39 alumnos × 3 pesos normalizados)
@@ -236,7 +232,7 @@ En representacion_real.py, implementa un operador de mutación diferente:
         Diferencia máxima entre promedios: 0.08
         
         
-### 🔷 REPRESENTACIÓN REAL - SIGMA 0.05
+### 🔷 Representación real - Sigma 0.05
 
         Problema: Optimizar distribución de alumnos usando pesos probabilísticos
         Cromosoma: 117 valores reales (39 alumnos × 3 pesos normalizados)       
@@ -263,6 +259,9 @@ En representacion_real.py, implementa un operador de mutación diferente:
         Diferencia máxima entre promedios: 0.08
     
 ### 🔷 Prueba con diferentes valores de sigma:
+**🔰Sigma = 0.3:** Genera soluciones con notas más dispersas (mayor varianza) y fitness constante en todas las generaciones, sin mejoras significativas.  
+**🔰Sigma = 0.1:** Soluciones más equilibradas, con promedios de notas similares y una varianza un poco menor que con sigma = 0.3, resultando en una mejor estabilidad.  
+**🔰Sigma = 0.05:** Menor variabilidad en las notas, con una varianza más baja en el examen A y notas más consistentes.  
 
 ## ✅ Actividad 4: Restricciones Adicionales
 Modifica representacion_permutacional.py para agregar una restricción:  
